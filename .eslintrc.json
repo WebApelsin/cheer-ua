@@ -1,3 +1,178 @@
 {
-  "extends": "next/core-web-vitals"
+    "extends": [ 
+        "next/core-web-vitals" 
+    ],
+    "plugins": [
+        "@stylistic/eslint-plugin"
+    ],
+    "rules": {
+        // disallow unnecessary fragments
+        "react/jsx-no-useless-fragment": ["warn", { "allowallowExpressions": true }],
+
+        // enforces a consistent indentation style
+        "@stylistic/indent": ["error", 4],
+        // enforces consistent use of semicolons
+        "@stylistic/semi": ["error", "always"],
+        // enforce spacing around a semicolon
+        "@stylistic/semi-spacing": ["warn", { "before": false, "after": true }],
+        // enforces the consistent use of either backticks, double, or single quotes
+        "@stylistic/quotes": ["warn", "double", { "avoidEscape": true, "allowTemplateLiterals": true }],
+        // enforces consistent spacing around keywords and keyword-like tokens: as (in module declarations), 
+        // async (of async functions), await (of await expressions), break, case, catch, class, const, continue, 
+        // debugger, default, delete, do, else, export, extends, finally, for, from (in module declarations), function, 
+        // get (of getters), if, import, in (in for-in statements), let, new, of (in for-of statements), return, 
+        // set (of setters), static, super, switch, this, throw, try, typeof, var, void, while, with, and yield
+        "@stylistic/keyword-spacing": ["error", { "before": true, "after": true }],
+        // enforces a maximum line length to increase code readability and maintainability
+        "@stylistic/max-len": ["warn", { "code": 120, "ignoreUrls": true, "ignoreRegExpLiterals": true }],
+
+        // enforces line breaks after opening and before closing array brackets        
+        "@stylistic/array-bracket-newline": ["warn", "consistent"],
+        // enforces consistent spacing inside array brackets
+        "@stylistic/array-bracket-spacing": ["warn", "never"],
+        // enforces line breaks between array elements
+        "@stylistic/array-element-newline": ["warn", "consistent"],
+        // normalize style of spacing before/after an arrow function's arrow(=>)
+        "@stylistic/arrow-spacing": ["warn", { "before": true, "after": true }],
+        // enforces consistent spacing inside an open block token and the next token on the same line
+        // or inside a close block token and previous token on the same line
+        "@stylistic/block-spacing": ["warn", "always"],
+        // enforces consistent use of trailing commas in object and array literals
+        "@stylistic/comma-dangle": ["warn", "never"],
+        // enforces consistent spacing before and after commas in variable declarations, array literals, 
+        // object literals, function parameters, and sequences
+        "@stylistic/comma-spacing": ["warn", { "before": false, "after": true }],
+        // enforce newline consistency in member expressions
+        "@stylistic/dot-location": ["warn", "property"],
+        // enforces line breaks between arguments of a function call
+        "@stylistic/function-call-argument-newline": ["warn", "consistent"],
+        // requires or disallows spaces between the function name and the opening parenthesis that calls it
+        "@stylistic/function-call-spacing": ["warn", "never"],
+        // enforces spacing around the colon in object literal properties
+        "@stylistic/key-spacing": ["warn", { "beforeColon": false, "afterColon": true }],
+        
+        // disallows unnecessary semicolons
+        "@stylistic/no-extra-semi": "warn",
+        // eliminate floating decimal points and will warn whenever a numeric value has a decimal point but is missing a 
+        // number either before or after it
+        "@stylistic/no-floating-decimal": "warn",
+        // checks BinaryExpression, LogicalExpression and ConditionalExpression
+        "@stylistic/no-mixed-operators": ["error", {
+            "groups": [
+                ["&", "|", "^", "~", "<<", ">>", ">>>"],
+                ["&&", "||"],
+                ["in", "instanceof"]
+            ],
+            "allowSamePrecedence": true
+        }],
+        // disallow multiple whitespace around logical expressions, conditional expressions, declarations, 
+        // array elements, object properties, sequences and function parameters
+        "@stylistic/no-multi-spaces": "warn",
+        // reduce the scrolling required when reading through your code
+        // "@stylistic/no-multiple-empty-lines:": ["error", { "max": 2, "maxEOF": 1 }],
+        // disallows trailing whitespace (spaces, tabs, and other Unicode whitespace characters) at the end of lines
+        "@stylistic/no-trailing-spaces": "warn",
+        // disallows whitespace around the dot or before the opening bracket before properties of objects if they are on 
+        // the same line
+        "@stylistic/no-whitespace-before-property": "error",
+
+        // requires or disallows a line break between { and its following token, and between } and its preceding token 
+        // of object literals or destructuring assignments
+        "@stylistic/object-curly-newline": ["warn", { "consistent": true }],
+        // enforces consistent spacing inside braces of object literals, destructuring assignments, and import/export 
+        // specifiers
+        "@stylistic/object-curly-spacing": ["warn", "always"],
+        // enforces a consistent linebreak style for operators
+        "@stylistic/operator-linebreak": ["error", "after", { "overrides": { "?": "before", ":": "before" }}],
+        // requires quotes around object literal property names
+        "@stylistic/quote-props": ["warn", "consistent"],
+        // enforce consistent spacing between rest and spread operators and their expressions
+        "@stylistic/rest-spread-spacing": ["error", "never"],
+        // reports line terminators around semicolons
+        "@stylistic/semi-style": ["error", "last"],
+        // enforce consistency of spacing before blocks
+        "@stylistic/space-before-blocks": ["error", "always"],
+        // enforce consistent spacing before function parentheses and as such, will warn whenever whitespace doesn't 
+        // match the preferences specified
+        "@stylistic/space-before-function-paren": ["warn", { 
+            "anonymous": "always", "named": "never", "asyncArrow": "always" 
+        }],
+        // enforce consistent spacing directly inside of parentheses, by disallowing or requiring one or more spaces to 
+        // the right of ( and to the left of )
+        "@stylistic/space-in-parens": ["warn", "never"],
+        // ensure there are spaces around infix operators
+        "@stylistic/space-infix-ops": ["warn", { "int32Hint": false }],
+        // enforces consistency regarding the spaces after words unary operators and after/before nonwords unary 
+        // operators
+        "@stylistic/space-unary-ops": ["error", { "words": true, "nonwords": false }],
+        // enforce consistency of spacing after the start of a comment // or /*
+        "@stylistic/spaced-comment": ["warn", "always"],
+        // controls spacing around colons of case and default clauses in switch statements
+        "@stylistic/switch-colon-spacing": ["warn", { "after": true, "before": false }],
+        // maintain consistency around the spacing inside of template literals
+        "@stylistic/template-curly-spacing": ["warn", "never"],
+
+        // improves readability by enforcing lines between class members
+        // "@stylistic/lines-between-class-members": ["warn", {  }],
+        // enforces a maximum number of statements allowed per line
+        // "@stylistic/max-statements-per-line": ["error", { "max": 1 }],
+        // requires or disallows blank lines between the given 2 kinds of statements
+        // "@stylistic/padding-line-between-statements": [{ blankLine: "always", prev: "*", next: "return" }]
+
+        // enforce or disallow spaces inside of curly braces in JSX attributes and expressions
+        "@stylistic/jsx-child-element-spacing": "warn",
+        // checks all JSX multiline elements and verifies the location of the closing bracket
+        "@stylistic/jsx-closing-bracket-location": ["warn", { 
+            "selfClosing": "after-props", 
+            "nonEmpty": "after-props" 
+        }],
+        // enforce the closing tag location for multiline JSX elements
+        "@stylistic/jsx-closing-tag-location": "warn",
+        // disallow unnecessary JSX expressions when literals alone are sufficient or enforce JSX expressions on 
+        // literals in JSX children or attributes
+        "@stylistic/jsx-curly-brace-presence": ["error", "never"],
+        // enforces consistent linebreaks inside of curlies of jsx curly expressions
+        "@stylistic/jsx-curly-newline": "off",
+        // enforce or disallow spaces inside of curly braces in JSX attributes and expressions
+        "@stylistic/jsx-curly-spacing": ["warn", { "when": "never" }],
+        // enforce or disallow spaces around equal signs in JSX attributes
+        "@stylistic/jsx-equals-spacing": ["warn", "never"],
+        // enforce proper position of the first property in JSX
+        "@stylistic/jsx-first-prop-new-line": ["off", "multiline-multiprop"],
+        // enforce JSX indentation
+        "@stylistic/jsx-indent": ["error", 4],
+        // enforce consistent indentation style
+        "@stylistic/jsx-indent-props": ["error", 4],
+        // enforce maximum of props on a single line in JSX
+        "@stylistic/jsx-max-props-per-line": ["off", { "maximum": 1, "when": "multiline" }],
+        // require or prevent a new line after jsx elements and expressions
+        "@stylistic/jsx-newline": "off",
+        // require one JSX element per line
+        "@stylistic/jsx-one-expression-per-line": "off",
+        // disallow multiple spaces between inline JSX props
+        "@stylistic/jsx-props-no-multi-spaces": "warn",
+        // enforces the consistent use of either double or single quotes in JSX attributes
+        "@stylistic/jsx-quotes": ["warn", "prefer-double"],
+        // disallow extra closing tags for components without children
+        "@stylistic/jsx-self-closing-comp": ["warn", { "component": true }],
+        // enforce props alphabetical sorting
+        "@stylistic/jsx-sort-props": "off",
+        // enforce whitespace in and around the JSX opening and closing brackets
+        "@stylistic/jsx-tag-spacing": ["error", { 
+            "closingSlash": "never", 
+            "beforeSelfClosing": "always", 
+            "afterOpening": "never",
+            "beforeClosing": "never"
+        }],
+        // disallow missing parentheses around multiline JSX
+        "@stylistic/jsx-wrap-multilines": ["warn", {
+            "declaration": "parens-new-line",
+            "assignment": "parens-new-line",
+            "return": "parens-new-line",
+            "arrow": "ignore",
+            "condition": "ignore",
+            "logical": "ignore",
+            "prop": "ignore"
+        }]
+    }
 }
