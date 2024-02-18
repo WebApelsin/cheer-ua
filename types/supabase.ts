@@ -232,6 +232,7 @@ export interface Database {
                 Row: {
                     age: string | null
                     coach: string | null
+                    id: number
                     is_active: boolean | null
                     members: string | null
                     nomination: string | null
