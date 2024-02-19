@@ -1,6 +1,12 @@
-export type Json = | string | number | boolean | null | { [key: string]: Json | undefined } | Json[];
+export type Json =
+  | string
+  | number
+  | boolean
+  | null
+  | { [key: string]: Json | undefined }
+  | Json[];
 
-export interface Database {
+export type Database = {
     public: {
         Tables: {
             evaluation_criteria: {
@@ -10,7 +16,7 @@ export interface Database {
                     id: number
                     max_value: number
                     nomination_id: number
-                    order: number
+                    sort_order: number
                     subject: string
                 }
                 Insert: {
@@ -19,7 +25,7 @@ export interface Database {
                     id?: number
                     max_value?: number
                     nomination_id: number
-                    order?: number
+                    sort_order?: number
                     subject: string
                 }
                 Update: {
@@ -28,7 +34,7 @@ export interface Database {
                     id?: number
                     max_value?: number
                     nomination_id?: number
-                    order?: number
+                    sort_order?: number
                     subject?: string
                 }
                 Relationships: [
@@ -72,10 +78,31 @@ export interface Database {
                         referencedColumns: ["id"]
                     },
                     {
+                        foreignKeyName: "evaluations_criteria_id_fkey"
+                        columns: ["criteria_id"]
+                        isOneToOne: false
+                        referencedRelation: "judge_protocol_templates"
+                        referencedColumns: ["criteria_id"]
+                    },
+                    {
+                        foreignKeyName: "evaluations_performance_id_fkey"
+                        columns: ["performance_id"]
+                        isOneToOne: false
+                        referencedRelation: "judge_protocol_templates"
+                        referencedColumns: ["performance_id"]
+                    },
+                    {
                         foreignKeyName: "evaluations_performance_id_fkey"
                         columns: ["performance_id"]
                         isOneToOne: false
                         referencedRelation: "performances"
+                        referencedColumns: ["id"]
+                    },
+                    {
+                        foreignKeyName: "evaluations_performance_id_fkey"
+                        columns: ["performance_id"]
+                        isOneToOne: false
+                        referencedRelation: "startlist"
                         referencedColumns: ["id"]
                     },
                     {
@@ -228,11 +255,23 @@ export interface Database {
             }
         }
         Views: {
+            judge_protocol_templates: {
+                Row: {
+                    category: string | null
+                    criteria_id: number | null
+                    description: string | null
+                    max_value: number | null
+                    performance_id: number | null
+                    sort_order: number | null
+                    subject: string | null
+                }
+                Relationships: []
+            }
             startlist: {
                 Row: {
                     age: string | null
                     coach: string | null
-                    id: number
+                    id: number | null
                     is_active: boolean | null
                     members: string | null
                     nomination: string | null
@@ -262,7 +301,7 @@ export interface Database {
             [_ in never]: never
         }
     }
-}
+};
 
 export type Tables<
     PublicTableNameOrOptions extends

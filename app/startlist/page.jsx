@@ -1,41 +1,18 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import { cookies } from "next/headers";
-
-import type { Database } from "@/types/supabase";
-type Performance = Database["public"]["Views"]["startlist"]["Row"];
-
+import { useRouter } from "next/navigation";
+import { useStartlist } from "@/hooks";
 import { Container, Heading, Badge, Text, Table } from "@radix-ui/themes";
 import styles from "@/styles/startlist.module.css";
 
 export default function StartlistPage() {
-    const [startlist, setStartlist] = useState<Array<Performance>>([]);
-    const [loading, setLoading] = useState<boolean>(false);
-    const [error, setError] = useState<string>();
+    const router = useRouter();
+    const [startlist] = useStartlist();
 
-    async function getStartlist() {
-        const supabase = createClientComponentClient<Database>();
-        // const supabase = createServerComponentClient<Database>({ cookies });
-
-        // TODO: filter by event_id
-        const { data, error } = await supabase
-            .from("startlist")
-            .select();
-
-        setStartlist(data);
-    }
-
-    const onClick = (item: Performance) => {
-        console.log(item);
+    const onClick = (item) => {
         // TODO: check if the current user has rights to make evaluations
-        // TODO: navigate to performance view
+        router.push(`/performance/${item.id}`);
     };
-
-    useEffect(() => {
-        getStartlist();
-    }, []);
 
     return (
         <main>
