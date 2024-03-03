@@ -2,13 +2,12 @@
 
 import { useState, useEffect } from "react";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import type { Database } from "@/types/supabase";
-import type { PostgrestError } from "@supabase/supabase-js";
 
-type EvaluationCriteria = Database["public"]["Views"]["judge_protocol_templates"]["Row"];
+import type { Database, EvaluationCriteria } from "@/types/supabase";
+import type { PostgrestError } from "@supabase/supabase-js";
 type Status = "IDLE" | "LOADING" | "OK" | "ERROR";
 
-export default function useEvaluationCriterias(performance_id: number) : [
+export default function useEvaluationCriterias(performance_id: number): [
     EvaluationCriteria[],
     Status,
     PostgrestError | null

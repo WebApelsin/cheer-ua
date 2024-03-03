@@ -3,25 +3,29 @@
 import { useState, useEffect } from "react";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
-import type { Database, Performance } from "@/types/supabase";
+import type { Database, Evaluation } from "@/types/supabase";
 import type { PostgrestError } from "@supabase/supabase-js";
-
 type Status = "IDLE" | "LOADING" | "OK" | "ERROR";
 
-export default function useStartlist(): [Performance[], Status, PostgrestError | null] {
+export default function useEvaluations(performance_id: number): [
+    Evaluation[],
+    Status,
+    PostgrestError | null
+] {
     const supabase = createClientComponentClient<Database>();
 
-    const [startlist, setStartlist] = useState<Performance[]>([]);
+    const [evaluations, setEvaluations] = useState<Evaluation[]>([]);
     const [status, setStatus] = useState<Status>("IDLE");
     const [error, setError] = useState<PostgrestError | null>(null);
 
     async function getData() {
         const { data, error } = await supabase
-            .from("startlist")
-            .select();
+            .from("evaluations")
+            .select()
+            .eq("performance_id", performance_id);
 
         if (data !== null) {
-            setStartlist(data);
+            setEvaluations(data);
             setStatus("OK");
             setError(null);
         } else {
@@ -34,5 +38,5 @@ export default function useStartlist(): [Performance[], Status, PostgrestError |
         getData();
     }, []);
 
-    return [startlist, status, error];
+    return [evaluations, status, error];
 }

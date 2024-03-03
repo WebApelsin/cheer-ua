@@ -2,10 +2,10 @@
 
 import { useState, useEffect } from "react";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import type { Database } from "@/types/supabase";
+
+import type { Database, Performance } from "@/types/supabase";
 import type { PostgrestError } from "@supabase/supabase-js";
 
-type Performance = Database["public"]["Views"]["startlist"]["Row"];
 type Status = "IDLE" | "LOADING" | "OK" | "ERROR";
 
 export default function usePerformance(id: number): [

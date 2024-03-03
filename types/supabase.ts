@@ -59,7 +59,7 @@ export type Database = {
                     criteria_id: number
                     id?: number
                     performance_id: number
-                    user_id: string
+                    user_id?: string
                     value?: number
                 }
                 Update: {
@@ -258,11 +258,11 @@ export type Database = {
             judge_protocol_templates: {
                 Row: {
                     category: string | null
-                    criteria_id: number | null
+                    criteria_id: number
                     description: string | null
-                    max_value: number | null
-                    performance_id: number | null
-                    sort_order: number | null
+                    max_value: number
+                    performance_id: number
+                    sort_order: number
                     subject: string | null
                 }
                 Relationships: []
@@ -382,3 +382,8 @@ export type Enums<
     : PublicEnumNameOrOptions extends keyof Database["public"]["Enums"]
         ? Database["public"]["Enums"][PublicEnumNameOrOptions]
         : never;
+
+
+export type Performance = Database["public"]["Views"]["startlist"]["Row"];
+export type Evaluation = Database["public"]["Tables"]["evaluations"]["Row"];
+export type EvaluationCriteria = Database["public"]["Views"]["judge_protocol_templates"]["Row"];
