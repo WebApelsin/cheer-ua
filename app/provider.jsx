@@ -2,7 +2,7 @@
 
 import { Theme } from "@radix-ui/themes";
 
-export default function Provider({ children }: { children: React.ReactNode }) {
+export default function Provider({ children }) {
     return (
         <Theme
             appearance="light"
