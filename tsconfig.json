@@ -21,9 +21,11 @@
             "@/hooks": ["./hooks"],
             "@/hooks/*": ["./hooks/*"],
             "@/styles/*": ["./styles/*"],
-            "@/types/*": ["./types/*"]
+            "@/types/*": ["./types/*"],
+            "@/utils": ["./utils"],
+            "@/utils/*": ["./utils/*"],
         }
     },
-    "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/startlist/page.jsx", "app/performance/[id]/page.jsx"],
+    "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/startlist/page.jsx", "app/performance/[id]/ClientPage.jsx", "app/auth/page.jsx", "app/provider.jsx", "app/page.jsx", "app/layout.jsx"],
     "exclude": ["node_modules"]
 }
