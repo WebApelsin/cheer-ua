@@ -4,21 +4,30 @@ import { PlusIcon, MinusIcon } from "@radix-ui/react-icons";
 import styles from "@/styles/spinner.module.css";
 
 type SpinnerProps = {
-    value: number | undefined;
-    min: number | undefined;
-    max: number | undefined;
-    onChange: (value: number) => void;
+    name?: string;
+    value?: number;
+    min?: number;
+    max?: number;
+    step?: number;
+    onChange?: (value: number) => void;
 };
 
 export default function Spinner(props: SpinnerProps): React.ReactNode {
-    const { value = 0, min = 0, max = 100, onChange: handleChange } = props;
+    const {
+        name,
+        value = 0,
+        min = 0,
+        max = 100,
+        step = 1.0,
+        onChange: handleChange = () => {}
+    } = props;
 
     const onIncrement = () => {
-        handleChange(Math.min(value + 1, max));
+        handleChange(Math.min(value + step, max));
     };
 
     const onDecrement = () => {
-        handleChange(Math.max(value - 1, min));
+        handleChange(Math.max(value - step, min));
     };
 
     const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -28,18 +37,20 @@ export default function Spinner(props: SpinnerProps): React.ReactNode {
 
     return (
         <div className={styles.container}>
-            <IconButton color="gray" radius="full" onClick={onDecrement}>
+            <IconButton type="button" color="gray" highContrast radius="full" onClick={onDecrement}>
                 <MinusIcon />
             </IconButton>
 
             <input type="number"
                 className={styles.input}
+                name={name}
+                value={value}
                 min={min}
                 max={max}
-                value={value}
+                step={step}
                 onChange={onChange} />
 
-            <IconButton color="gray" radius="full" onClick={onIncrement}>
+            <IconButton type="button" color="gray" highContrast radius="full" onClick={onIncrement}>
                 <PlusIcon />
             </IconButton>
         </div>
