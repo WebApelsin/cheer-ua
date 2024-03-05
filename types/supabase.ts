@@ -411,7 +411,7 @@ export type Enums<
         ? Database["public"]["Enums"][PublicEnumNameOrOptions]
         : never;
 
-
+export type Event = Database["public"]["Tables"]["events"]["Row"];
 export type Performance = Database["public"]["Views"]["startlist"]["Row"];
 export type Evaluation = Database["public"]["Tables"]["evaluations"]["Row"];
 export type EvaluationCriteria = Database["public"]["Views"]["evaluations_template"]["Row"];

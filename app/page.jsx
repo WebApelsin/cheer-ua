@@ -1,18 +1,26 @@
 import Link from "next/link";
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
+import { getEvents } from "@/hooks";
+
+import { Container } from "@radix-ui/themes";
 
 export default async function Home() {
-    const supabase = createServerComponentClient({ cookies });
-    const { data: { session } } = await supabase.auth.getSession();
+    const events = await getEvents(cookies);
+
+    // const { data: { session } } = await supabase.auth.getSession();
+    // console.log(session?.user.id, session?.user.email);
+
+    // TODO: check if there any active event
 
     return (
         <main>
-            <h1>Homepage</h1>
-            <p>Hello, {session?.user.email} ({session?.user.id})</p>
-
-            <Link href="/startlist">Стартлист</Link>
-            <Link href="/auth/signout">Вийти</Link>
+            <Container>
+                {events.map(event =>
+                    <Link key={event.id} href={`/${event.id}/startlist`}>
+                        {event.name}
+                    </Link>
+                )}
+            </Container>
         </main>
     );
 }

@@ -26,6 +26,6 @@
             "@/utils/*": ["./utils/*"],
         }
     },
-    "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/startlist/page.jsx", "app/performance/[id]/ClientPage.jsx", "app/auth/page.jsx", "app/provider.jsx", "app/page.jsx", "app/layout.jsx"],
+    "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/[event_id]/startlist/page.jsx", "app/performance/[id]/ClientPage.jsx", "app/auth/page.jsx", "app/provider.jsx", "app/page.jsx", "app/layout.jsx"],
     "exclude": ["node_modules"]
 }

@@ -1,8 +1,5 @@
-export { default as getPerformance } from "./getPerformance";
+export { default as getEvents } from "./getEvents";
+export { default as getStartlist } from "./getStartlist";
+export { default as getPerformanceById } from "./getPerformanceById";
 export { default as getEvaluations } from "./getEvaluations";
 export { default as getEvaluationCriterias } from "./getEvaluationCriterias";
-
-export { default as usePerformance } from "./usePerformance";
-export { default as useEvaluations } from "./useEvaluations";
-export { default as useEvaluationCriterias } from "./useEvaluationCriterias";
-export { default as useStartlist } from "./useStartlist";

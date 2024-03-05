@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useContext } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useParams } from "next/navigation";
 import { groupBy } from "@/utils";
 
 import { EvaluationContext } from "./EvaluationContext";
@@ -11,7 +11,6 @@ import Spinner from "@/components/Spinner";
 
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import type { Database, Evaluation, EvaluationCriteria } from "@/types/supabase";
-export type EvaluationInsert = Database["public"]["Tables"]["evaluations"]["Insert"];
 
 type EvaluationFormProps = {
     performance_id: number;
@@ -34,6 +33,7 @@ export default function EvaluationForm(props: EvaluationFormProps): React.ReactN
 
 
     const router = useRouter();
+    const params = useParams();
     const [values, setValues] = useState(initialValues);
     const [submitting, setSubmitting] = useState(false);
     const { setTotal } = useContext(EvaluationContext);
@@ -72,11 +72,11 @@ export default function EvaluationForm(props: EvaluationFormProps): React.ReactN
         // TODO: handle errors
 
         setSubmitting(false);
-        router.push(`/startlist`);
+        router.push(`/${params.event_id}/startlist`);
     };
 
     const onDismiss = () => {
-        router.push(`/startlist`);
+        router.push(`/${params.event_id}/startlist`);
     };
 
     return (

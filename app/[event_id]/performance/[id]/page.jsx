@@ -1,15 +1,14 @@
 import { notFound } from "next/navigation";
 import { cookies } from "next/headers";
-import { getPerformance, getEvaluationCriterias, getEvaluations } from "@/hooks";
+import { getPerformanceById, getEvaluationCriterias, getEvaluations } from "@/hooks";
 
 import { Container } from "@radix-ui/themes";
 import Header from "./Header";
 import EvaluationForm from "./EvaluationForm";
 import { EvaluationContextProvider } from "./EvaluationContext";
 
-export default async function PerformancePage({ params: { id } }) {
-    // TODO: reuse supabase client
-    const performance = await getPerformance(id, cookies);
+export default async function PerformancePage({ params: { event_id, id } }) {
+    const performance = await getPerformanceById(id, cookies);
     if (!performance) {
         return notFound();
     }
