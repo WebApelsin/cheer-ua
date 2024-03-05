@@ -4,13 +4,17 @@ select
     row_number() over (order by performances.start_time) as row_number,
     performances.start_time,
     nominations.name as nomination,
-    nominations.age,
+    ages.name as age,
     performances.team,
     performances.members,
     performances.coach,
+    performances.is_editable,
     performances.is_active
 from
-    performances left join nominations 
+    performances 
+      inner join nominations 
         on performances.nomination_id = nominations.id
+      inner join ages
+        on performances.age_id = ages.id
 order by
     performances.start_time;

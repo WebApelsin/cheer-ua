@@ -9,6 +9,21 @@ export type Json =
 export type Database = {
     public: {
         Tables: {
+            ages: {
+                Row: {
+                    id: number
+                    name: string
+                }
+                Insert: {
+                    id?: number
+                    name: string
+                }
+                Update: {
+                    id?: number
+                    name?: string
+                }
+                Relationships: []
+            }
             evaluation_criteria: {
                 Row: {
                     category: string | null
@@ -123,16 +138,19 @@ export type Database = {
             }
             judges: {
                 Row: {
+                    age_id: number
                     id: number
                     nomination_id: number
                     user_id: string
                 }
                 Insert: {
+                    age_id?: number
                     id?: number
                     nomination_id: number
                     user_id: string
                 }
                 Update: {
+                    age_id?: number
                     id?: number
                     nomination_id?: number
                     user_id?: string
@@ -143,6 +161,13 @@ export type Database = {
                         columns: ["nomination_id"]
                         isOneToOne: false
                         referencedRelation: "nominations"
+                        referencedColumns: ["id"]
+                    },
+                    {
+                        foreignKeyName: "judges_age_id_fkey"
+                        columns: ["age_id"]
+                        isOneToOne: false
+                        referencedRelation: "ages"
                         referencedColumns: ["id"]
                     },
                     {
@@ -163,17 +188,14 @@ export type Database = {
             }
             nominations: {
                 Row: {
-                    age: string
                     id: number
                     name: string
                 }
                 Insert: {
-                    age: string
                     id?: number
                     name: string
                 }
                 Update: {
-                    age?: string
                     id?: number
                     name?: string
                 }
@@ -181,27 +203,33 @@ export type Database = {
             }
             performances: {
                 Row: {
+                    age_id: number
                     coach: string | null
                     id: number
                     is_active: boolean
+                    is_editable: boolean
                     members: string | null
                     nomination_id: number
                     start_time: string | null
                     team: string | null
                 }
                 Insert: {
+                    age_id: number | null
                     coach?: string | null
                     id?: number
                     is_active?: boolean
+                    is_editable?: boolean
                     members?: string | null
                     nomination_id: number
                     start_time?: string | null
                     team?: string | null
                 }
                 Update: {
+                    age_id: number | null
                     coach?: string | null
                     id?: number
                     is_active?: boolean
+                    is_editable?: boolean
                     members?: string | null
                     nomination_id?: number
                     start_time?: string | null
@@ -213,6 +241,13 @@ export type Database = {
                         columns: ["nomination_id"]
                         isOneToOne: false
                         referencedRelation: "nominations"
+                        referencedColumns: ["id"]
+                    },
+                    {
+                        foreignKeyName: "public_performances_age_id_fkey"
+                        columns: ["age_id"]
+                        isOneToOne: false
+                        referencedRelation: "ages"
                         referencedColumns: ["id"]
                     }
                 ]
@@ -271,8 +306,9 @@ export type Database = {
                 Row: {
                     age: string | null
                     coach: string | null
-                    id: number | null
-                    is_active: boolean | null
+                    id: number
+                    is_active: boolean
+                    is_editable: boolean
                     members: string | null
                     nomination: string | null
                     row_number: number | null
