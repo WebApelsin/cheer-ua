@@ -7,7 +7,7 @@ export default async function getEvaluationCriterias(performance_id: number, coo
     const supabase = createServerComponentClient<Database>({ cookies });
 
     const { data, error } = await supabase
-        .from("judge_protocol_templates")
+        .from("evaluations_template")
         .select()
         .eq("performance_id", performance_id);
 

@@ -1,4 +1,4 @@
-create view public.judge_protocol_templates as
+create view public.evaluations_template as
 select
     performances.id as performance_id,
     evaluation_criteria.id as criteria_id,

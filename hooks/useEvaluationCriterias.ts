@@ -20,7 +20,7 @@ export default function useEvaluationCriterias(performance_id: number): [
 
     async function getData(performance_id: number) {
         const { data, error } = await supabase
-            .from("judge_protocol_templates")
+            .from("evaluations_template")
             .select()
             .eq("performance_id", performance_id);
 

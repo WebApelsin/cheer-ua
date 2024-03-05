@@ -96,14 +96,14 @@ export type Database = {
                         foreignKeyName: "evaluations_criteria_id_fkey"
                         columns: ["criteria_id"]
                         isOneToOne: false
-                        referencedRelation: "judge_protocol_templates"
+                        referencedRelation: "evaluations_template"
                         referencedColumns: ["criteria_id"]
                     },
                     {
                         foreignKeyName: "evaluations_performance_id_fkey"
                         columns: ["performance_id"]
                         isOneToOne: false
-                        referencedRelation: "judge_protocol_templates"
+                        referencedRelation: "evaluations_template"
                         referencedColumns: ["performance_id"]
                     },
                     {
@@ -121,14 +121,7 @@ export type Database = {
                         referencedColumns: ["id"]
                     },
                     {
-                        foreignKeyName: "evaluations_user_id_fkey"
-                        columns: ["user_id"]
-                        isOneToOne: false
-                        referencedRelation: "users"
-                        referencedColumns: ["id"]
-                    },
-                    {
-                        foreignKeyName: "evaluations_user_id_fkey"
+                        foreignKeyName: "pevaluations_user_id_fkey"
                         columns: ["user_id"]
                         isOneToOne: false
                         referencedRelation: "users"
@@ -297,7 +290,7 @@ export type Database = {
             }
         }
         Views: {
-            judge_protocol_templates: {
+            evaluations_template: {
                 Row: {
                     category: string | null
                     criteria_id: number
@@ -421,4 +414,4 @@ export type Enums<
 
 export type Performance = Database["public"]["Views"]["startlist"]["Row"];
 export type Evaluation = Database["public"]["Tables"]["evaluations"]["Row"];
-export type EvaluationCriteria = Database["public"]["Views"]["judge_protocol_templates"]["Row"];
+export type EvaluationCriteria = Database["public"]["Views"]["evaluations_template"]["Row"];
