@@ -1,7 +1,9 @@
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import type { Database, Event } from "@/types/supabase";
 
-export default async function getEvents(cookies: () => any): Promise<Event[]> {
+export default async function getEvents(cookies: () => any)
+    : Promise<Event[]>
+{
     const supabase = createServerComponentClient<Database>({ cookies });
 
     const { data, error } = await supabase

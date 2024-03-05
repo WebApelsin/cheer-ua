@@ -1,5 +1,5 @@
 import { cookies } from "next/headers";
-import { getStartlist } from "@/hooks";
+import { getStartlist } from "@/api";
 
 import { Container, Heading, Table } from "@radix-ui/themes";
 import StartlistItem from "./Item";

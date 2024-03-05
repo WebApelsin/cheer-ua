@@ -1,11 +1,13 @@
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
-import type { Database, Performance } from "@/types/supabase";
+import type { Database, Event } from "@/types/supabase";
 
-export default async function getPerformanceById(id: number, cookies: () => any): Promise<Performance | null> {
+export default async function getEventById(id: number, cookies: () => any)
+    : Promise<Event | null>
+{
     const supabase = createServerComponentClient<Database>({ cookies });
 
     const { data, error } = await supabase
-        .from("startlist")
+        .from("events")
         .select()
         .eq("id", id);
 

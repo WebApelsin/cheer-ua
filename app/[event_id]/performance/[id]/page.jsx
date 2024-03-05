@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { cookies } from "next/headers";
-import { getPerformanceById, getEvaluationCriterias, getEvaluations } from "@/hooks";
+import { getPerformanceById, getEvaluationCriterias, getEvaluations } from "@/api";
 
 import { Container } from "@radix-ui/themes";
 import Header from "./Header";

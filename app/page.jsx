@@ -1,14 +1,11 @@
 import Link from "next/link";
 import { cookies } from "next/headers";
-import { getEvents } from "@/hooks";
+import { getEvents } from "@/api";
 
 import { Container } from "@radix-ui/themes";
 
 export default async function Home() {
     const events = await getEvents(cookies);
-
-    // const { data: { session } } = await supabase.auth.getSession();
-    // console.log(session?.user.id, session?.user.email);
 
     // TODO: check if there any active event
 

@@ -5,6 +5,9 @@
 // };
 
 export default function Layout({ params: { event_id }, children }) {
+    // const { data: { session } } = await supabase.auth.getSession();
+    // console.log(session?.user.id, session?.user.email);
+
     // TODO: get current event
     // TODO: get current user
     // TODO: show header
