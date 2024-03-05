@@ -6,9 +6,9 @@ create table public.judges (
     
     constraint judges_pkey primary key (id),
     constraint judges_nomination_id_fkey foreign key (nomination_id) 
-        references nominations (id) on update cascade on delete cascade,
+        references nominations (id) on update cascade on delete restrict,
     constraint judges_age_id_fkey foreign key (age_id) 
-        references ages (id) on update cascade on delete cascade
+        references ages (id) on update cascade on delete restrict
     constraint judges_user_id_fkey foreign key (user_id) 
-        references auth.users (id)
+        references auth.users (id) on update cascade on delete restrict
 ) tablespace pg_default;

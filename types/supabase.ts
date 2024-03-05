@@ -136,33 +136,59 @@ export type Database = {
                     }
                 ]
             }
+            events: {
+                Row: {
+                    chief_judge: string | null
+                    chief_secretary: string | null
+                    id: number
+                    image: string | null
+                    is_active: boolean
+                    name: string
+                    start_date: string
+                }
+                Insert: {
+                    chief_judge?: string | null
+                    chief_secretary?: string | null
+                    id?: number
+                    image?: string | null
+                    is_active?: boolean
+                    name: string
+                    start_date?: string
+                }
+                Update: {
+                    chief_judge?: string | null
+                    chief_secretary?: string | null
+                    id?: number
+                    image?: string | null
+                    is_active?: boolean
+                    name?: string
+                    start_date?: string
+                }
+                Relationships: []
+            }
             judges: {
                 Row: {
                     age_id: number
+                    event_id: number
                     id: number
                     nomination_id: number
                     user_id: string
                 }
                 Insert: {
-                    age_id?: number
+                    age_id: number
+                    event_id: number
                     id?: number
                     nomination_id: number
                     user_id: string
                 }
                 Update: {
                     age_id?: number
+                    event_id?: number
                     id?: number
                     nomination_id?: number
                     user_id?: string
                 }
                 Relationships: [
-                    {
-                        foreignKeyName: "judges_nomination_id_fkey"
-                        columns: ["nomination_id"]
-                        isOneToOne: false
-                        referencedRelation: "nominations"
-                        referencedColumns: ["id"]
-                    },
                     {
                         foreignKeyName: "judges_age_id_fkey"
                         columns: ["age_id"]
@@ -171,10 +197,17 @@ export type Database = {
                         referencedColumns: ["id"]
                     },
                     {
-                        foreignKeyName: "judges_user_id_fkey"
-                        columns: ["user_id"]
+                        foreignKeyName: "judges_event_id_fkey"
+                        columns: ["event_id"]
                         isOneToOne: false
-                        referencedRelation: "users"
+                        referencedRelation: "events"
+                        referencedColumns: ["id"]
+                    },
+                    {
+                        foreignKeyName: "judges_nomination_id_fkey"
+                        columns: ["nomination_id"]
+                        isOneToOne: false
+                        referencedRelation: "nominations"
                         referencedColumns: ["id"]
                     },
                     {
@@ -205,6 +238,7 @@ export type Database = {
                 Row: {
                     age_id: number
                     coach: string | null
+                    event_id: number
                     id: number
                     is_active: boolean
                     is_editable: boolean
@@ -216,6 +250,7 @@ export type Database = {
                 Insert: {
                     age_id: number | null
                     coach?: string | null
+                    event_id: number
                     id?: number
                     is_active?: boolean
                     is_editable?: boolean
@@ -227,6 +262,7 @@ export type Database = {
                 Update: {
                     age_id: number | null
                     coach?: string | null
+                    event_id?: number
                     id?: number
                     is_active?: boolean
                     is_editable?: boolean
@@ -237,53 +273,24 @@ export type Database = {
                 }
                 Relationships: [
                     {
-                        foreignKeyName: "performances_nomination_id_fkey"
-                        columns: ["nomination_id"]
-                        isOneToOne: false
-                        referencedRelation: "nominations"
-                        referencedColumns: ["id"]
-                    },
-                    {
-                        foreignKeyName: "public_performances_age_id_fkey"
+                        foreignKeyName: "performances_age_id_fkey"
                         columns: ["age_id"]
                         isOneToOne: false
                         referencedRelation: "ages"
                         referencedColumns: ["id"]
-                    }
-                ]
-            }
-            profiles: {
-                Row: {
-                    given_name: string
-                    id: number
-                    role: Database["public"]["Enums"]["role"]
-                    user_id: string
-                }
-                Insert: {
-                    given_name: string
-                    id?: number
-                    role: Database["public"]["Enums"]["role"]
-                    user_id: string
-                }
-                Update: {
-                    given_name?: string
-                    id?: number
-                    role?: Database["public"]["Enums"]["role"]
-                    user_id?: string
-                }
-                Relationships: [
+                    },
                     {
-                        foreignKeyName: "profiles_user_id_fkey"
-                        columns: ["user_id"]
-                        isOneToOne: true
-                        referencedRelation: "users"
+                        foreignKeyName: "performances_event_id_fkey"
+                        columns: ["event_id"]
+                        isOneToOne: false
+                        referencedRelation: "events"
                         referencedColumns: ["id"]
                     },
                     {
-                        foreignKeyName: "profiles_user_id_fkey"
-                        columns: ["user_id"]
-                        isOneToOne: true
-                        referencedRelation: "users"
+                        foreignKeyName: "performances_nomination_id_fkey"
+                        columns: ["nomination_id"]
+                        isOneToOne: false
+                        referencedRelation: "nominations"
                         referencedColumns: ["id"]
                     }
                 ]
@@ -306,6 +313,7 @@ export type Database = {
                 Row: {
                     age: string | null
                     coach: string | null
+                    event_id: number
                     id: number
                     is_active: boolean
                     is_editable: boolean
@@ -317,21 +325,12 @@ export type Database = {
                 }
                 Relationships: []
             }
-            users: {
-                Row: {
-                    email: string | null
-                    given_name: string | null
-                    id: string | null
-                    role: Database["public"]["Enums"]["role"] | null
-                }
-                Relationships: []
-            }
         }
         Functions: {
             [_ in never]: never
         }
         Enums: {
-            role: "visitor" | "judge" | "admin"
+            [_ in never]: never
         }
         CompositeTypes: {
             [_ in never]: never

@@ -9,7 +9,5 @@ create table public.evaluation_criteria (
 
     constraint evaluation_criterias_pkey primary key (id),
     constraint evaluation_criteria_nomination_id_fkey foreign key (nomination_id) 
-        references nominations (id) 
-        on update cascade 
-        on delete cascade
+        references nominations (id) on update cascade on delete cascade
 ) tablespace pg_default;

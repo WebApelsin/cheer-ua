@@ -1,5 +1,6 @@
 create view public.startlist as
 select
+    performances.event_id,
     performances.id,
     row_number() over (order by performances.start_time) as row_number,
     performances.start_time,
