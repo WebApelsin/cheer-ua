@@ -2,37 +2,39 @@ import { notFound } from "next/navigation";
 import { cookies } from "next/headers";
 import { getPerformance, getEvaluationCriterias, getEvaluations } from "@/hooks";
 
-import { Container, Section, Heading, Text, Badge } from "@radix-ui/themes";
+import { Container } from "@radix-ui/themes";
+import Header from "./Header";
 import EvaluationForm from "./EvaluationForm";
+import { EvaluationContextProvider } from "./EvaluationContext";
 
 export default async function PerformancePage({ params: { id } }) {
+    // TODO: reuse supabase client
     const performance = await getPerformance(id, cookies);
+    if (!performance) {
+        return notFound();
+    }
+
     const criterias = await getEvaluationCriterias(id, cookies);
     const evaluations = await getEvaluations(id, cookies);
+    const total = evaluations.reduce((sum, item) => sum + item.value, 0);
 
-    if (!performance)
-        return notFound();
-
+    // TODO: check if the current performance is active/editable
     // TODO: check if the current user has rights to make evaluations
+    // TODO: check if there are any evaluation criteria
     // TODO: handle form submit with server action
 
     return (
         <main>
-            <Container>
-                <Section size="2">
-                    <Heading>
-                        {performance.team}
-                    </Heading>
-                    <Text size="2">
-                        {performance.nomination} <Badge color="gray">{performance.age}</Badge>
-                    </Text>
-                </Section>
+            <EvaluationContextProvider total={total}>
+                <Header performance={performance} />
 
-                <EvaluationForm
-                    performance_id={performance.id}
-                    criterias={criterias}
-                    evaluations={evaluations} />
-            </Container>
+                <Container>
+                    <EvaluationForm
+                        performance_id={performance.id}
+                        criterias={criterias}
+                        evaluations={evaluations} />
+                </Container>
+            </EvaluationContextProvider>
         </main>
     );
 }

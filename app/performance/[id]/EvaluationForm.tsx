@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useRouter } from "next/navigation";
 import { groupBy } from "@/utils";
 
+import { EvaluationContext } from "./EvaluationContext";
 import { Section, Flex, Box, Heading, Text, Button, Separator } from "@radix-ui/themes";
 import { CheckIcon, UpdateIcon } from "@radix-ui/react-icons";
 import Spinner from "@/components/Spinner";
@@ -35,10 +36,15 @@ export default function EvaluationForm(props: EvaluationFormProps): React.ReactN
     const router = useRouter();
     const [values, setValues] = useState(initialValues);
     const [submitting, setSubmitting] = useState(false);
+    const { setTotal } = useContext(EvaluationContext);
 
 
     const onChange = (criteria_id: number, value: number) => {
-        setValues({ ...values, [criteria_id]: value });
+        const newValues = { ...values, [criteria_id]: value };
+        const total = Object.values(newValues).reduce((sum, v) => sum + v, 0);
+
+        setValues(newValues);
+        setTotal(total);
     };
 
     const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
