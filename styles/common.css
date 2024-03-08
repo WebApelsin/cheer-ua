@@ -23,6 +23,18 @@ body {
     padding: 0;
 }
 
+.container {
+    margin: 0 auto;
+    max-width: 1136px;    
+}
+
+@media (max-width: 1200px) {
+    .container {
+        margin: 0 2em;
+    }
+}
+
+
 @media (prefers-color-scheme: dark) {
     html {
         color-scheme: dark;

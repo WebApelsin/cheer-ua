@@ -1,0 +1,17 @@
+.header {
+    border-bottom: 1px solid var(--gray-a6);
+    padding: 0.75em 0; /* 12px 0 */
+}
+
+.branding {
+    align-items: center;
+    color: var(--gray-a12);
+    display: flex;
+    gap: 0.5em; /* 8px */
+    text-decoration: none !important;
+}
+
+.logo {
+    height: 2.5em;
+    width: 2.5em;
+}

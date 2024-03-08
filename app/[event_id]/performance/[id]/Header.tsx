@@ -2,14 +2,14 @@
 
 import { useContext } from "react";
 import { EvaluationContext } from "./EvaluationContext";
-import { Container, Section, Heading, Text, Badge, Strong } from "@radix-ui/themes";
+import { Section, Heading, Text, Badge, Strong } from "@radix-ui/themes";
 import type { Performance } from "@/types/supabase";
 
 export default function Header({ performance }: { performance: Performance }) {
     const { total } = useContext(EvaluationContext);
 
     return (
-        <Container>
+        <div className="container">
             <Section size="2">
                 <Heading>
                     {performance.team}
@@ -21,6 +21,6 @@ export default function Header({ performance }: { performance: Performance }) {
                     Усього: <Strong>{total}</Strong>
                 </Text>
             </Section>
-        </Container>
+        </div>
     );
 }

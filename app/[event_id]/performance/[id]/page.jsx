@@ -2,7 +2,6 @@ import { notFound } from "next/navigation";
 import { cookies } from "next/headers";
 import { getPerformanceById, getEvaluationCriterias, getEvaluations } from "@/api";
 
-import { Container } from "@radix-ui/themes";
 import Header from "./Header";
 import EvaluationForm from "./EvaluationForm";
 import { EvaluationContextProvider } from "./EvaluationContext";
@@ -27,12 +26,12 @@ export default async function PerformancePage({ params: { event_id, id } }) {
             <EvaluationContextProvider total={total}>
                 <Header performance={performance} />
 
-                <Container>
+                <div className="container">
                     <EvaluationForm
                         performance_id={performance.id}
                         criterias={criterias}
                         evaluations={evaluations} />
-                </Container>
+                </div>
             </EvaluationContextProvider>
         </main>
     );
