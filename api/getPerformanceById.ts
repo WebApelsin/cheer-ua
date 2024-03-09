@@ -12,7 +12,7 @@ export default async function getPerformanceById(id: number, cookies: () => any)
         .eq("id", id);
 
     if (error)
-        throw error;
+        throw new Error(error.message);
 
     return data.length > 0 ? data[0] : null;
 }

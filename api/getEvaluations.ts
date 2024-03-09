@@ -2,7 +2,7 @@ import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import type { Database, Evaluation } from "@/types/supabase";
 
 export default async function getEvaluations(performance_id: number, cookies: () => any)
-    : Promise<Evaluation[] | null>
+    : Promise<Evaluation[]>
 {
     const supabase = createServerComponentClient<Database>({ cookies });
 
@@ -12,7 +12,7 @@ export default async function getEvaluations(performance_id: number, cookies: ()
         .eq("performance_id", performance_id);
 
     if (error)
-        throw new Error(error.details);
+        throw new Error(error.message);
 
     return data;
 }

@@ -12,7 +12,7 @@ export default async function getEvents(cookies: () => any)
         .eq("is_active", true);
 
     if (error)
-        throw error;
+        throw new Error(error.message);
 
     return data;
 }
