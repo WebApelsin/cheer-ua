@@ -304,6 +304,7 @@ export type Database = {
             }
             startlist: {
                 Row: {
+                    age_id: number
                     age: string | null
                     coach: string | null
                     event_id: number
@@ -311,6 +312,7 @@ export type Database = {
                     is_active: boolean
                     is_editable: boolean
                     members: string | null
+                    nomination_id: number
                     nomination: string | null
                     row_number: number | null
                     start_time: string | null
@@ -415,3 +417,4 @@ export type Event = Database["public"]["Tables"]["events"]["Row"];
 export type Performance = Database["public"]["Views"]["startlist"]["Row"];
 export type Evaluation = Database["public"]["Tables"]["evaluations"]["Row"];
 export type EvaluationCriteria = Database["public"]["Views"]["evaluations_template"]["Row"];
+export type Assignment = Database["public"]["Tables"]["judges"]["Row"];
