@@ -1,8 +1,23 @@
-
-.nomination {
-    
+.row {
+    transition: all 0.3s ease;
 }
 
-.coach {
-    
+.row:hover {
+    background: var(--gray-a2);
+}
+
+.row.active {
+    background: var(--amber-a2);
+}
+
+.row.assigned {
+    cursor: pointer;
+}
+
+.status.assigned {
+    color: var(--gray-a10);
+}
+
+.status.editable {
+    color: var(--grass-10);
 }
