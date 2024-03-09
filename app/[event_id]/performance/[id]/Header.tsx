@@ -8,6 +8,9 @@ import type { Performance } from "@/types/supabase";
 export default function Header({ performance }: { performance: Performance }) {
     const { total } = useContext(EvaluationContext);
 
+    // TODO: show back button
+    // TODO: show the rank
+
     return (
         <div className="container">
             <Section size="2">

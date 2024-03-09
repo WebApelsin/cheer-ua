@@ -7,7 +7,8 @@ import { Container } from "@radix-ui/themes";
 export default async function Home() {
     const events = await getEvents(cookies);
 
-    // TODO: check if there any active event
+    // TODO: redirect to the event page if there are only one active event
+    // TODO: show message if there isn't any active event
 
     return (
         <main>

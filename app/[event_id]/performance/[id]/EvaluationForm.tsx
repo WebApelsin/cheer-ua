@@ -49,7 +49,7 @@ export default function EvaluationForm(props: EvaluationFormProps): React.ReactN
 
     const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        // TODO: validate data
+        // TODO: validate data, show warning if there are missing evalutions
         setSubmitting(true);
 
         const supabase = createClientComponentClient<Database>();
@@ -69,13 +69,14 @@ export default function EvaluationForm(props: EvaluationFormProps): React.ReactN
             .insert(evaluations)
             .select();
 
-        // TODO: handle errors
+        // TODO: handle database errors
 
         setSubmitting(false);
         router.push(`/${params.event_id}/startlist`);
     };
 
     const onDismiss = () => {
+        // TODO: show warning if there are unsaved changes
         router.push(`/${params.event_id}/startlist`);
     };
 

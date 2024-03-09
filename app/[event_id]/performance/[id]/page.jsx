@@ -16,10 +16,12 @@ export default async function PerformancePage({ params: { event_id, id } }) {
     const evaluations = await getEvaluations(id, cookies);
     const total = evaluations.reduce((sum, item) => sum + item.value, 0);
 
-    // TODO: check if the current performance is active/editable
     // TODO: check if the current user has rights to make evaluations
+    // TODO: disable form controls if the performance is not enabled
     // TODO: check if there are any evaluation criteria
     // TODO: handle form submit with server action
+
+    // TODO: show evaluations summary if the current user is admin
 
     return (
         <main>

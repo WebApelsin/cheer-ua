@@ -22,6 +22,8 @@ export default function Spinner(props: SpinnerProps): React.ReactNode {
         onChange: handleChange = () => {}
     } = props;
 
+    // TODO: add support for precision property to control the number of decimals
+
     const onIncrement = () => {
         handleChange(Math.min(value + step, max));
     };

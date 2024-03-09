@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import { useRouter } from "next/navigation";
@@ -13,7 +14,7 @@ export default function Header({ event, user }: { event: Event, user: User }) {
     const router = useRouter();
 
     const onLogout = () => {
-        // TODO: show dialog
+        // TODO: show confirm dialog
         router.push("/auth/signout");
     };
 
@@ -22,7 +23,11 @@ export default function Header({ event, user }: { event: Event, user: User }) {
             <div className="container">
                 <Flex align="center" justify="between" gap="4">
                     <Link className={styles.branding} href={`/${event.id}/startlist`}>
-                        <img className={styles.logo} src={event.image} alt="" />
+                        {event.image &&
+                            // TODO: show placeholder if the image isn't set
+                            <img className={styles.logo} src={event.image} alt="" />
+                        }
+
                         <Heading size="3">{event.name}</Heading>
                     </Link>
 
