@@ -18,3 +18,5 @@ create table public.performances (
     constraint performances_age_id_fkey foreign key (age_id) 
         references ages (id) on update cascade on delete restrict    
 ) tablespace pg_default;
+
+alter table performances replica identity full;

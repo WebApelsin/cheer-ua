@@ -2,16 +2,27 @@
 
 import { useRouter, useParams } from "next/navigation";
 import { Table, Text, Badge } from "@radix-ui/themes";
+import { DrawingPinFilledIcon } from "@radix-ui/react-icons";
 import classNames from "classnames";
 import styles from "@/styles/startlist.module.css";
-import { DrawingPinFilledIcon } from "@radix-ui/react-icons";
 
 import type { Performance } from "@/types/supabase";
 
+type StartlistRowProps = {
+    item: Performance,
+    score?: number | null,
+    active: boolean,
+    editable: boolean,
+    assigned: boolean
+};
 
-export default function TableRow({ item, score, assigned = false }: {
-    item: Performance, score?: number | null, assigned: boolean
-}) {
+export default function StartlistRow({
+    item,
+    score = null,
+    active = false,
+    editable = false,
+    assigned = false
+}: StartlistRowProps) {
     const router = useRouter();
     const params = useParams();
 
@@ -23,7 +34,7 @@ export default function TableRow({ item, score, assigned = false }: {
     };
 
     const className = classNames(styles.row, {
-        [styles.active]: item.is_active,
+        [styles.active]: active,
         [styles.assigned]: assigned
     });
 
@@ -32,7 +43,7 @@ export default function TableRow({ item, score, assigned = false }: {
             <Table.Cell justify="center">
                 {assigned &&
                     <DrawingPinFilledIcon className={classNames(styles.status, styles.assigned, {
-                        [styles.editable]: item.is_editable
+                        [styles.editable]: editable
                     })} />
                 }
             </Table.Cell>
@@ -40,7 +51,7 @@ export default function TableRow({ item, score, assigned = false }: {
                 {item.row_number}
             </Table.Cell> */}
             <Table.Cell justify="end">
-                {item.start_time?.replace(/(\d{2}\:\d{2})(\:\d{2})$/g, "$1")}
+                {item.start_time?.replace(/^(\d{2})\:(\d{2})\:(\d{2})$/g, "$1:$2")}
             </Table.Cell>
             <Table.Cell className={styles.nomination}>
                 <Text className="nowrap">{item.nomination}</Text>
@@ -54,7 +65,7 @@ export default function TableRow({ item, score, assigned = false }: {
                 <Text className="nowrap">{item.coach}</Text>
             </Table.Cell>
             <Table.Cell justify="end">
-                <Text className="nowrap">{score}</Text>
+                <Text className="nowrap">{score?.toFixed(1)}</Text>
             </Table.Cell>
         </Table.Row>
     );
