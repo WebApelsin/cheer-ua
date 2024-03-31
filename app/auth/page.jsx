@@ -3,6 +3,8 @@ import { AvatarIcon, LockClosedIcon, ArrowRightIcon } from "@radix-ui/react-icon
 import styles from "@/styles/auth.module.css";
 
 export default function Auth() {
+    // TODO: handle authentication errors
+
     return (
         <main className="full-height">
             <Flex direction="column" align="center" justify="center" height="100%">

@@ -15,6 +15,7 @@ export async function POST(request: Request) {
     const { error } = await supabase.auth.signInWithPassword({ email, password });
 
     if (error) {
+        console.error(error);
         // TODO: handle error
         return NextResponse.redirect(`${requestUrl.origin}/auth`, { status: 301 });
     }
