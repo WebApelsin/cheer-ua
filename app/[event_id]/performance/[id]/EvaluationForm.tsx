@@ -36,7 +36,7 @@ export default function EvaluationForm(props: EvaluationFormProps): React.ReactN
     const params = useParams();
     const [values, setValues] = useState(initialValues);
     const [submitting, setSubmitting] = useState(false);
-    const { setTotal } = useContext(EvaluationContext);
+    const { setScore } = useContext(EvaluationContext);
 
 
     const onChange = (criteria_id: number, value: number) => {
@@ -44,7 +44,7 @@ export default function EvaluationForm(props: EvaluationFormProps): React.ReactN
         const total = Object.values(newValues).reduce((sum, v) => sum + v, 0);
 
         setValues(newValues);
-        setTotal(total);
+        setScore(total);
     };
 
     const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {

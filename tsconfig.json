@@ -19,6 +19,7 @@
         "paths": {
             "@/components/*": ["./components/*"],
             "@/api": ["./api"],
+            "@/api/*": ["./api/*"],
             "@/styles/*": ["./styles/*"],
             "@/types/*": ["./types/*"],
             "@/utils": ["./utils"],
